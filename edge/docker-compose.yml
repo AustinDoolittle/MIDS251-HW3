@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  mqtt:
+    image: "valentinvieriu/alpine-mosquitto-arm"
+    ports:
+      - 1883:1883
+    networks:
+      - hw3
+  face-finder:
+    image: "austin/face-finder"
+    build: 
+      context: .
+      dockerfile: './docker/face-finder.dockerfile'
+    command:
+      - --debug
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix/:/tmp/.X11-unix
+    devices: 
+      - /dev/video1:/dev/video0
+    depends_on:
+      - mqtt
+    networks:
+      - hw3
+
+networks:
+  hw3:
+    driver: bridge
+    

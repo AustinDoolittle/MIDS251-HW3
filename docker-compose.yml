@@ -1,9 +1,0 @@
-version: '3'
-
-services:
-  face-finder:
-    image: "austin/face-finder"
-    build: 
-      context: .
-      dockerfile: './docker/face-finder.dockerfile'
-    
