@@ -7,8 +7,17 @@ services:
       - 1883:1883
     networks:
       - hw3
+  face-forwarder:
+    image: austin/face-forwarder
+    build:
+      context: .
+      dockerfile: './docker/face-forwarder.dockerfile'
+    depends_on:
+      - mqtt
+    networks:
+      - hw3
   face-finder:
-    image: "austin/face-finder"
+    image: austin/face-finder
     build: 
       context: .
       dockerfile: './docker/face-finder.dockerfile'

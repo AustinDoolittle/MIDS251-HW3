@@ -22,12 +22,15 @@ RUN apt-get update && apt-get install -y \
     python-pip \
     python3-pip
 
-RUN pip3 install numpy paho-mqtt
+RUN pip3 install \
+    numpy \
+    paho-mqtt \
+    protobuf
 
 COPY face_finder.py /app/
+COPY found_face_pb2.py /app/
 COPY haarcascade_frontalface_default.xml /app/resources/
-RUN chmod 755 /app/face_finder.py
 
 USER $USER
 
-ENTRYPOINT python3 /app/face_finder.py
+ENTRYPOINT [ "python3",  "/app/face_finder.py" ]

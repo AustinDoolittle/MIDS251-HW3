@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message FoundFace {
+  string source_id = 1;
+  bytes image_data = 2;
+
+  message BoundingBox {
+    float x = 1;
+    float y = 2;
+    float w = 3;
+    float h = 4;
+  }
+  BoundingBox bbox = 3;
+}
