@@ -13,4 +13,6 @@ RUN pip3 install paho-mqtt
 COPY face_forwarder.py /app/
 COPY found_face_pb2.py /app/
 
+ENV HOME /app/
+
 ENTRYPOINT [ "python3", "/app/face_forwarder.py" ]

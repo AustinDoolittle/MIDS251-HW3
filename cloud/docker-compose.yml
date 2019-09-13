@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mqtt:
+    image: valentinvieriu/alpine-mosquitto-arm
+    ports:
+      - 1883:1883
+    networks:
+      - hw3
+  face-storer:
+    image: austin/face-storer
+    build:
+      context: .
+      dockerfile: docker/face-storer.Dockerfile
+    networks:
+      - hw3
+    volumes:
+      - ./secrets/:/app/.bluemix/
+    depends_on:
+      - mqtt
+
+networks:
+  hw3:
+    driver: bridge

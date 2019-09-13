@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mqtt:
-    image: "valentinvieriu/alpine-mosquitto-arm"
+    image: valentinvieriu/alpine-mosquitto-arm
     ports:
       - 1883:1883
     networks:
@@ -11,7 +11,7 @@ services:
     image: austin/face-forwarder
     build:
       context: .
-      dockerfile: './docker/face-forwarder.dockerfile'
+      dockerfile: docker/face-forwarder.Dockerfile
     depends_on:
       - mqtt
     networks:
@@ -20,7 +20,7 @@ services:
     image: austin/face-finder
     build: 
       context: .
-      dockerfile: './docker/face-finder.dockerfile'
+      dockerfile: docker/face-finder.Dockerfile
     command:
       - --debug
     environment:

@@ -7,7 +7,7 @@ from paho.mqtt import client
 def parse_args(argv):
     parser = argparse.ArgumentParser('face-forwarder')
     parser.add_argument('--source-host', default='mqtt')
-    parser.add_argument('--dest-host', default='1.1.1.1')
+    parser.add_argument('--dest-host', default='127.0.0.1')
     parser.add_argument('--topic', default='midsw251/hw3/+')
     parser.add_argument('--qos', type=int, default=1)
     return parser.parse_args(argv)

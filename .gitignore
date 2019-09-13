@@ -126,3 +126,6 @@ dmypy.json
 # CUSTOM
 # vscode settings
 .vscode/
+
+# Our Service Account Credentials
+**/secrets
