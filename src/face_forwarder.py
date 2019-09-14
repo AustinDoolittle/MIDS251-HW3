@@ -21,9 +21,9 @@ def main(args):
     logger.info('Starting up face forwarder...')
 
     # setup dest client
-    logger.info('Creating destination client...')
+    logger.info(f'Creating destination client at {args.dest_host}...')
     dest_client = client.Client()
-    dest_client.connect(args.source_host)
+    dest_client.connect(args.dest_host)
     dest_client.loop_start()
 
     # setup source client
@@ -39,7 +39,7 @@ def main(args):
 
     def source_on_message(client, userdata, msg):
         logger.info(f'Forwarding {len(msg.payload)} byte message')
-        dest_client.publish(args.topic, payload=msg.payload, qos=1)  
+        dest_client.publish(msg.topic, payload=msg.payload, qos=1)  
     
     source_client.on_message = source_on_message
 

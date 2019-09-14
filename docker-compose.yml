@@ -22,6 +22,9 @@ services:
       - mqtt-arm
     networks:
       - hw3
+    command:
+      - --dest-host
+      - 198.11.248.77
   face-finder:
     image: austin/face-finder
     build: 

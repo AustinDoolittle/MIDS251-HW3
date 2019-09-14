@@ -40,7 +40,7 @@ def main(args):
     mqtt_client.on_connect = on_connect
 
     def on_message(client, userdata, msg):
-        logger.info(f'{msg.payload} byte message recieved')
+        logger.info(f'{len(msg.payload)} byte message recieved')
         ff = FoundFace.ParseFromString(msg.payload)
         buf = io.BytesIO(ff.image_data) 
 
