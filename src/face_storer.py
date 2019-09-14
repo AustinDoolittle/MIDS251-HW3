@@ -14,15 +14,11 @@ logger = get_logger(__name__)
 
 def parse_args(argv):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--bucket', default='hw3-facestore')
+    parser.add_argument('--bucket', default='face-bucket')
     parser.add_argument('--mqtt-host', default='mqtt')
     parser.add_argument('--topic', default='midsw251/hw3/+')
 
     return parser.parse_args(argv)
-
-
-def create_key(source_id, session_id, frame_number, face_number):
-    return ':'.join([source_id, session_id, str(frame_number), str(face_number)])
 
 
 def main(args):
@@ -44,15 +40,8 @@ def main(args):
         ff = FoundFace.ParseFromString(msg.payload)
         buf = io.BytesIO(ff.image_data) 
 
-        new_key = create_key(
-            ff.source_id, 
-            ff.session_id, 
-            ff.frame_number, 
-            ff.face_number
-        )
-
-        logger.info(f'Uploading to {args.bucket}/{new_key}')
-        cos_client.upload_fileobj(buf, args.bucket, new_key)
+        logger.info(f'Uploading to {args.bucket}/{ff.image_id}')
+        cos_client.upload_fileobj(buf, args.bucket, ff.image_id)
 
     
     mqtt_client.on_message = on_message
