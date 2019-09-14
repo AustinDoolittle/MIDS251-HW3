@@ -36,12 +36,15 @@ def main(args):
     mqtt_client.on_connect = on_connect
 
     def on_message(client, userdata, msg):
-        logger.info(f'{len(msg.payload)} byte message recieved')
-        ff = FoundFace.ParseFromString(msg.payload)
-        buf = io.BytesIO(ff.image_data) 
+        try:
+            logger.info(f'{len(msg.payload)} byte message recieved')
+            ff = FoundFace.ParseFromString(msg.payload)
+            buf = io.BytesIO(ff.image_data) 
 
-        logger.info(f'Uploading to {args.bucket}/{ff.image_id}')
-        cos_client.upload_fileobj(buf, args.bucket, ff.image_id)
+            logger.info(f'Uploading to {args.bucket}/{ff.image_id}')
+            cos_client.upload_fileobj(buf, args.bucket, ff.image_id)
+        except Exception as e:
+            logger.error(str(e))
 
     
     mqtt_client.on_message = on_message

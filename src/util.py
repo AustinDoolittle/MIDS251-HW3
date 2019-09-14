@@ -3,7 +3,7 @@ import sys
 
 
 def get_logger(name):
-    logger = logging.getLogger('face-finder')
+    logger = logging.getLogger(name)
     handler = logging.StreamHandler(sys.stdout)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     handler.setFormatter(formatter)
