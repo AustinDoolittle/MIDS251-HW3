@@ -39,7 +39,7 @@ def main(args):
 
     def source_on_message(client, userdata, msg):
         logger.info(f'Forwarding {len(msg.payload)} byte message')
-        dest_client.publish(args.topic, payload=msg.payload)  
+        dest_client.publish(args.topic, payload=msg.payload, qos=1)  
     
     source_client.on_message = source_on_message
 

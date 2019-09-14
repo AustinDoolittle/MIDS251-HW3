@@ -35,7 +35,7 @@ def main(args):
     # setup source client
     def on_connect(client, userdata, flags, rc):
         logger.info('Mosquitto client connected successfully')
-        mqtt_client.subscribe(args.topic, qos=args.qos)
+        mqtt_client.subscribe(args.topic, qos=1)
 
     mqtt_client.on_connect = on_connect
 

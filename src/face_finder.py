@@ -96,7 +96,7 @@ def main(args):
             )
 
             # publish it to the queue
-            mqtt_client.publish(topic, payload=compiled_message)
+            mqtt_client.publish(topic, payload=compiled_message, qos=1)
 
             if not args.headless:
                 overlay_rectangle(grey_frame, x, y, w, h)
