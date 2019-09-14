@@ -22,7 +22,7 @@ logger.addHandler(handler)
 def parse_args(argv):
     parser = argparse.ArgumentParser('face-finder')
     parser.add_argument('--model-file', default=DEFAULT_MODEL_FILE)
-    parser.add_argument('--mqtt-host', default='mqtt')
+    parser.add_argument('--mqtt-host', default='mqtt-arm')
     parser.add_argument('--headless', action='store_true')
     parser.add_argument('--debug', action='store_true')
     parser.add_argument('--topic-prefix', default='midsw251/hw3/')

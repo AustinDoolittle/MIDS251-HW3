@@ -1,8 +1,14 @@
 version: '3'
 
 services:
-  mqtt:
+  mqtt-arm:
     image: valentinvieriu/alpine-mosquitto-arm
+    ports:
+      - 1883:1883
+    networks:
+      - hw3
+  mqtt:
+    image: trafex/alpine-mosquitto
     ports:
       - 1883:1883
     networks:
@@ -13,7 +19,7 @@ services:
       context: .
       dockerfile: docker/face-forwarder.Dockerfile
     depends_on:
-      - mqtt
+      - mqtt-arm
     networks:
       - hw3
   face-finder:
@@ -30,7 +36,7 @@ services:
     devices: 
       - /dev/video1:/dev/video0
     depends_on:
-      - mqtt
+      - mqtt-arm
     networks:
       - hw3
   face-storer:
