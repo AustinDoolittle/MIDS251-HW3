@@ -33,6 +33,17 @@ services:
       - mqtt
     networks:
       - hw3
+  face-storer:
+    image: austin/face-storer
+    build:
+      context: .
+      dockerfile: docker/face-storer.Dockerfile
+    networks:
+      - hw3
+    volumes:
+      - ./secrets/:/app/.bluemix/
+    depends_on:
+      - mqtt
 
 networks:
   hw3:

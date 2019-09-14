@@ -37,8 +37,8 @@ RUN pip3 install \
     protobuf
 
 # copy source files
-COPY face_finder.py /app/
-COPY found_face_pb2.py /app/
-COPY haarcascade_frontalface_default.xml /app/resources/
+COPY src/face_finder.py /app/
+COPY src/found_face_pb2.py /app/
+COPY resources/haarcascade_frontalface_default.xml /app/resources/
 
 ENTRYPOINT [ "python3",  "/app/face_finder.py" ]

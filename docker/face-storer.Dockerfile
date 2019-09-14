@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM nvcr.io/nvidia/l4t-base:r32.2.1
 
 # install dependencies
 RUN apt-get update && \
@@ -15,8 +15,8 @@ RUN pip3 install \
     protobuf
 
 # copy source
-COPY face_storer.py /app/
-COPY found_face_pb2.py /app/
+COPY src/face_storer.py /app/
+COPY src/found_face_pb2.py /app/
 
 ENV HOME /app/
 
