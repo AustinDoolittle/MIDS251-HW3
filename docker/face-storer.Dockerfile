@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/l4t-base:r32.2.1
+FROM ubuntu:18.04
 
 # install dependencies
 RUN apt-get update && \
