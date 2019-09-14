@@ -38,6 +38,7 @@ RUN pip3 install \
 
 # copy source files
 COPY src/face_finder.py /app/
+COPY src/util.py /app/
 COPY src/found_face_pb2.py /app/
 COPY resources/haarcascade_frontalface_default.xml /app/resources/
 

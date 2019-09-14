@@ -16,6 +16,7 @@ RUN pip3 install \
 
 # copy source
 COPY src/face_storer.py /app/
+COPY src/util.py /app/
 COPY src/found_face_pb2.py /app/
 
 ENV HOME /app/

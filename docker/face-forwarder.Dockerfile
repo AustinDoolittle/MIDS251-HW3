@@ -11,6 +11,7 @@ RUN apk add \
 RUN pip3 install paho-mqtt 
 
 COPY src/face_forwarder.py /app/
+COPY src/util.py /app/
 COPY src/found_face_pb2.py /app/
 
 ENV HOME /app/

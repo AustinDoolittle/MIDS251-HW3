@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x10\x66ound_face.proto\"\xbd\x01\n\tFoundFace\x12\x11\n\tsource_id\x18\x01 \x01(\t\x12\x12\n\nsession_id\x18\x02 \x01(\t\x12\x12\n\nimage_data\x18\x03 \x01(\x0c\x12\x14\n\x0c\x66rame_number\x18\x04 \x01(\x05\x12$\n\x04\x62\x62ox\x18\x05 \x01(\x0b\x32\x16.FoundFace.BoundingBox\x1a\x39\n\x0b\x42oundingBox\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01w\x18\x03 \x01(\x02\x12\t\n\x01h\x18\x04 \x01(\x02\x62\x06proto3')
+  serialized_pb=_b('\n\x10\x66ound_face.proto\"\x92\x01\n\tFoundFace\x12\x10\n\x08image_id\x18\x01 \x01(\t\x12\x12\n\nimage_data\x18\x02 \x01(\x0c\x12$\n\x04\x62\x62ox\x18\x03 \x01(\x0b\x32\x16.FoundFace.BoundingBox\x1a\x39\n\x0b\x42oundingBox\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01w\x18\x03 \x01(\x02\x12\t\n\x01h\x18\x04 \x01(\x02\x62\x06proto3')
 )
 
 
@@ -73,8 +73,8 @@ _FOUNDFACE_BOUNDINGBOX = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=153,
-  serialized_end=210,
+  serialized_start=110,
+  serialized_end=167,
 )
 
 _FOUNDFACE = _descriptor.Descriptor(
@@ -85,36 +85,22 @@ _FOUNDFACE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='source_id', full_name='FoundFace.source_id', index=0,
+      name='image_id', full_name='FoundFace.image_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='session_id', full_name='FoundFace.session_id', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='image_data', full_name='FoundFace.image_data', index=2,
-      number=3, type=12, cpp_type=9, label=1,
+      name='image_data', full_name='FoundFace.image_data', index=1,
+      number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='frame_number', full_name='FoundFace.frame_number', index=3,
-      number=4, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='bbox', full_name='FoundFace.bbox', index=4,
-      number=5, type=11, cpp_type=10, label=1,
+      name='bbox', full_name='FoundFace.bbox', index=2,
+      number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -132,7 +118,7 @@ _FOUNDFACE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=21,
-  serialized_end=210,
+  serialized_end=167,
 )
 
 _FOUNDFACE_BOUNDINGBOX.containing_type = _FOUNDFACE

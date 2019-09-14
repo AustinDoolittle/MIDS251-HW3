@@ -1,4 +1,3 @@
-import logging
 import sys
 import argparse
 import uuid
@@ -8,16 +7,14 @@ import cv2
 from paho.mqtt import client
 
 from found_face_pb2 import FoundFace
+from util import get_logger
+
+
+logger = get_logger(__name__)
 
 
 DEFAULT_MODEL_FILE = '/app/resources/haarcascade_frontalface_default.xml'
 
-
-logger = logging.getLogger('face-finder')
-handler = logging.StreamHandler(sys.stdout)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
 
 def parse_args(argv):
     parser = argparse.ArgumentParser('face-finder')
@@ -49,9 +46,9 @@ def overlay_rectangle(img, x, y, w, h):
     )
 
 
-def compile_message(img, id, x, y, w, h):
+def compile_message(img, x, y, w, h):
     ff = FoundFace()
-    ff.source_id = id
+    ff.image_id = get_uuid()
     ff.image_data = cv2.imencode('.jpg', img)[1].tostring()
     ff.bbox.x = x
     ff.bbox.y = y
@@ -61,9 +58,6 @@ def compile_message(img, id, x, y, w, h):
     return ff.SerializeToString()
 
 def main(args):
-    log_level = logging.DEBUG if args.debug else logging.INFO
-    logger.setLevel(log_level)
-
     # Initialize our necessary stuff
     logger.info('Initializing video capture...')
     cap = cv2.VideoCapture(0)
@@ -91,16 +85,13 @@ def main(args):
         grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(grey_frame, 1.3, 5)
 
-        for i, (x,y,w,h) in enumerate(faces):
-            logger.debug(f'Face{i}: x: {x}, y: {y}, w: {w}, h: {h}')
-
+        for x, y, w, h in faces:
             # crop the face 
             cropped_image = crop_image(grey_frame, x, y, w, h)
 
             # construct message
             compiled_message = compile_message(
                 cropped_image, 
-                host_id, 
                 x, y, w, h
             )
 
