@@ -24,7 +24,6 @@ def create_key(source_id, session_id, frame_number, face_number):
 def main(args):
     cos_client = ibm_boto3.client("s3")
     mqtt_client = mqtt.Client()
-    mqtt_client.connect(args.mqtt_host)
 
     # setup source client
     def on_connect(client, userdata, flags, rc):
@@ -48,7 +47,7 @@ def main(args):
     
     mqtt_client.on_message = on_message
 
-    mqtt_client.connect(args.source_host)
+    mqtt_client.connect(args.mqtt_host)
     mqtt_client.loop_forever()
 
 
