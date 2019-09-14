@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/l4t-base:r32.2.1
+FROM ubuntu:18.04
 
 # install dependencies
 RUN apt-get update && \
@@ -17,5 +17,7 @@ RUN pip3 install \
 # copy source
 COPY face_storer.py /app/
 COPY found_face_pb2.py /app/
+
+ENV HOME /app/
 
 ENTRYPOINT [ "python3", "/app/face_storer.py" ]
