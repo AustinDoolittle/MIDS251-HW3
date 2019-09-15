@@ -1,14 +1,14 @@
 import argparse
-import sys
 import io
+import json
 import logging
+import sys
 
 import ibm_boto3
 from ibm_botocore.client import Config
 from paho.mqtt import client as mqtt
 
 from found_face_pb2 import FoundFace
-from .secrets.cos import COS_API_KEY_ID, COS_RESOURCE_CRN
 from util import get_logger
 
 logger = get_logger('face-storer')
@@ -21,16 +21,21 @@ def parse_args(argv):
     parser.add_argument('--bucket', default='face-bucket')
     parser.add_argument('--mqtt-host', default='mqtt')
     parser.add_argument('--topic', default='midsw251/hw3/+')
+    parser.add_argument('--secrets', default='./secrets/secrets.json')
 
     return parser.parse_args(argv)
 
 
 def main(args):
     logger.info('Creating object store client')
+
+    with open(args.secrets, 'r') as fp: 
+        secrets_obj = json.load(fp)
+
     cos_client = ibm_boto3.resource(
         "s3",
-        ibm_api_key_id=COS_API_KEY_ID,
-        ibm_service_instance_id=COS_RESOURCE_CRN,
+        ibm_api_key_id=secrets_obj["COS_API_KEY_ID"],
+        ibm_service_instance_id=secrets_obj["COS_RESOURCE_CRN"],
         ibm_auth_endpoint=COS_AUTH_ENDPOINT,
         config=Config(signature_version="oauth"),
         endpoint_url=COS_ENDPOINT
