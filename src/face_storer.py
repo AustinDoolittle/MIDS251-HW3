@@ -38,7 +38,8 @@ def main(args):
     def on_message(client, userdata, msg):
         try:
             logger.info(f'{len(msg.payload)} byte message recieved')
-            ff = FoundFace.ParseFromString(msg.payload)
+            ff = FoundFace()
+            ff.ParseFromString(msg.payload)
             buf = io.BytesIO(ff.image_data) 
 
             logger.info(f'Uploading to {args.bucket}/{ff.image_id}')
