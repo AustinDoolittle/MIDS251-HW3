@@ -56,10 +56,11 @@ def main(args):
             logger.info(f'{len(msg.payload)} byte message recieved')
             ff = FoundFace()
             ff.ParseFromString(msg.payload)
-            buf = io.BytesIO(ff.image_data) 
+            image_buffer = io.BytesIO(ff.image_data) 
 
             logger.info(f'Uploading to {args.bucket}/{ff.image_id}')
-            cos_client.upload_fileobj(buf, args.bucket, ff.image_id)
+            obj = cos_client.Object(args.bucket, ff.image_id)
+            obj.upload_fileobj(image_buffer)
         except Exception:
             logger.exception(
                 'Something went wrong while forwarding the message'
