@@ -8,7 +8,7 @@ from ibm_botocore.client import Config
 from paho.mqtt import client as mqtt
 
 from found_face_pb2 import FoundFace
-from secrets import COS_API_KEY_ID, COS_RESOURCE_CRN
+from .secrets.cos import COS_API_KEY_ID, COS_RESOURCE_CRN
 from util import get_logger
 
 logger = get_logger('face-storer')
