@@ -3,14 +3,18 @@ import sys
 import io
 import logging
 
-from paho.mqtt import client as mqtt
 import ibm_boto3
+from ibm_botocore.client import Config
+from paho.mqtt import client as mqtt
 
 from found_face_pb2 import FoundFace
+from secrets import COS_API_KEY_ID, COS_RESOURCE_CRN
 from util import get_logger
 
 logger = get_logger('face-storer')
 
+COS_AUTH_ENDPOINT = "https://iam.cloud.ibm.com/identity/token"
+COS_ENDPOINT = "s3.us-east.cloud-object-storage.appdomain.cloud"
 
 def parse_args(argv):
     parser = argparse.ArgumentParser()
@@ -23,7 +27,14 @@ def parse_args(argv):
 
 def main(args):
     logger.info('Creating object store client')
-    cos_client = ibm_boto3.client("s3")
+    cos_client = ibm_boto3.resource(
+        "s3",
+        ibm_api_key_id=COS_API_KEY_ID,
+        ibm_service_instance_id=COS_RESOURCE_CRN,
+        ibm_auth_endpoint=COS_AUTH_ENDPOINT,
+        config=Config(signature_version="oauth"),
+        endpoint_url=COS_ENDPOINT
+    )
 
     logger.info('Creating mosquitto client')
     mqtt_client = mqtt.Client()
