@@ -9,7 +9,7 @@ import ibm_boto3
 from found_face_pb2 import FoundFace
 from util import get_logger
 
-logger = get_logger('face_storer')
+logger = get_logger('face-storer')
 
 
 def parse_args(argv):
@@ -38,7 +38,7 @@ def main(args):
     def on_message(client, userdata, msg):
         try:
             logger.info(f'{len(msg.payload)} byte message recieved')
-            ff = FoundFace.ParseFromString(str(msg.payload))
+            ff = FoundFace.ParseFromString(msg.payload.decode('utf-8'))
             buf = io.BytesIO(ff.image_data) 
 
             logger.info(f'Uploading to {args.bucket}/{ff.image_id}')

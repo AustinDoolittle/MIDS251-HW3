@@ -55,7 +55,7 @@ def compile_message(img, x, y, w, h):
     ff.bbox.w = w
     ff.bbox.h = h
 
-    return ff.SerializeToString()
+    return ff.SerializeToString().encode('utf-8')
 
 def main(args):
     # Initialize our necessary stuff
