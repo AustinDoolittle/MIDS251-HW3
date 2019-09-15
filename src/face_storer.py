@@ -21,7 +21,7 @@ def parse_args(argv):
     parser.add_argument('--bucket', default='face-bucket')
     parser.add_argument('--mqtt-host', default='mqtt')
     parser.add_argument('--topic', default='midsw251/hw3/+')
-    parser.add_argument('--secrets', default='./secrets/secrets.json')
+    parser.add_argument('--secrets', default='/app/secrets/secrets.json')
 
     return parser.parse_args(argv)
 
