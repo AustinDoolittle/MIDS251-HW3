@@ -9,7 +9,7 @@ import ibm_boto3
 from found_face_pb2 import FoundFace
 from util import get_logger
 
-logger = get_logger(__name__)
+logger = get_logger('face_storer')
 
 
 def parse_args(argv):
@@ -38,13 +38,15 @@ def main(args):
     def on_message(client, userdata, msg):
         try:
             logger.info(f'{len(msg.payload)} byte message recieved')
-            ff = FoundFace.ParseFromString(msg.payload)
+            ff = FoundFace.ParseFromString(str(msg.payload))
             buf = io.BytesIO(ff.image_data) 
 
             logger.info(f'Uploading to {args.bucket}/{ff.image_id}')
             cos_client.upload_fileobj(buf, args.bucket, ff.image_id)
-        except Exception as e:
-            logger.error(str(e))
+        except Exception:
+            logger.exception(
+                'Something went wrong while forwarding the message'
+            )
 
     
     mqtt_client.on_message = on_message

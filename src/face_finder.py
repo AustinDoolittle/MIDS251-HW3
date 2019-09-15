@@ -10,7 +10,7 @@ from found_face_pb2 import FoundFace
 from util import get_logger
 
 
-logger = get_logger(__name__)
+logger = get_logger('face-finder')
 
 
 DEFAULT_MODEL_FILE = '/app/resources/haarcascade_frontalface_default.xml'

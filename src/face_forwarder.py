@@ -5,7 +5,7 @@ from paho.mqtt import client
 
 from util import get_logger
 
-logger = get_logger(__name__)
+logger = get_logger('face-forwarder')
 
 
 def parse_args(argv):
