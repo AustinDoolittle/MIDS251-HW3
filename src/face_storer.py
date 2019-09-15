@@ -14,7 +14,7 @@ from util import get_logger
 logger = get_logger('face-storer')
 
 COS_AUTH_ENDPOINT = "https://iam.cloud.ibm.com/identity/token"
-COS_ENDPOINT = "s3.us-east.cloud-object-storage.appdomain.cloud"
+COS_ENDPOINT = "https://s3.private.us-east.cloud-object-storage.appdomain.cloud"
 
 def parse_args(argv):
     parser = argparse.ArgumentParser()
